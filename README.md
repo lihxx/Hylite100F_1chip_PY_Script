@@ -89,7 +89,7 @@
 
 ### 1.5 延时与对齐（HYLITE_IO 直接相关，见 §2）
 
-- 0x200~0x21F probe_out0~31：由 `countdown0_loop.m … countdown31_loop.m` 使用，形如 `countdownN_loop(u, target)`：每步写 1→写 0（10ms 间隔）＝一次 tap 步进，内部以 `current=(current-1) mod 32` 走到目标值 target(0~31)。链号映射：链 2k/2k+1 ↔ 芯片 k+1 的 data0/data1（k=0 起）。
+- 0x200-0x21F probe_out0-31：由 `countdown0_loop.m … countdown31_loop.m` 使用，形如 `countdownN_loop(u, target)`：每步写 1→写 0（10ms 间隔）＝一次 tap 步进，内部以 `current=(current-1) mod 32` 走到目标值 target(0~31)。链号映射：链 2k/2k+1 ↔ 芯片 k+1 的 data0/data1（k=0 起）。
 - delay_2 脚本依“数字链图像”定标给每条链设不同 target（成对相同值居多），链与芯片 data0/data1 一一对应。
 - 对齐步骤在正式取数前：LD_HASH(0x93)（可选）→ LD_BIT(0x91)（必需）→ LD_POS(0x92)（可选）各拉高 10ms~1s 再拉低；随后 LD(0x0F) 取数、0x94 回传。
 
